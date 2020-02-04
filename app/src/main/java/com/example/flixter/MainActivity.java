@@ -21,6 +21,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 
+// we declare the RecyclerView and new MovieAdapter here
 public class MainActivity extends AppCompatActivity {
 
     // endpoint to GET movies now playing

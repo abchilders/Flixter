@@ -1,17 +1,21 @@
 package com.example.flixter.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.flixter.DetailActivity;
 import com.example.flixter.R;
 import com.example.flixter.models.Movie;
 
@@ -37,7 +41,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("MovieAdapter", "oncreateViewHolder");
+        Log.d("MovieAdapter", "onCreateViewHolder");
         View movieView = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
         return new ViewHolder(movieView);
     }
@@ -60,9 +64,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     }
 
     // ViewHolder represents a row in the RecyclerView
+    // Holds references to each element in one row of RecyclerView: image, title, overview
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         // member variables
+        RelativeLayout container;
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivPoster;
@@ -70,19 +76,39 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         // constructor
         // View itemView = one row
         public ViewHolder(@NonNull View itemView) {
+            // invoke parent class constructor, RecyclerView.ViewHolder(itemView)
             super(itemView);
+
+            // connect member variables to the elements in our XML layout
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            container = itemView.findViewById(R.id.container);
         }
 
         // populate each view with data from a particular movie
-        public void bind(Movie movie) {
+        public void bind(final Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
 
             // use Glide to import movie poster image and load it into view
             Glide.with(context).load(movie.getPosterPath()).into(ivPoster);
+
+            // 1. Register click listener on the whole row
+            // add an onclick listener to the row in RecyclerView so we can do something when a
+            //      movie row is clicked
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 2. Navigate to a new activity on tap
+                    // "You can think of [intents] as the messengers that request an action from
+                    //      other components"-- binds components to each other at runtime
+                    Intent i = new Intent(context, DetailActivity.class);
+                    // pass data in key=val pairs to the new activity
+                    i.putExtra("title", movie.getTitle());
+                    context.startActivity(i);
+                }
+            });
         }
     }
 }
