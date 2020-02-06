@@ -12,6 +12,7 @@ import java.util.List;
 @Parcel
 public class Movie {
 
+    int movieId;
     String backdropPath;
     String posterPath;
     String title;
@@ -27,6 +28,7 @@ public class Movie {
     //      the exception
     public Movie(JSONObject jsonObject) throws JSONException {
         // get the value at key (name:) in the JSON object passed to us
+        movieId = jsonObject.getInt("id");
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
@@ -57,6 +59,10 @@ public class Movie {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
     }
 
+    public String getBackdropPath() {
+        return String.format("https://image.tmdb.org/t/p/w342/%s", backdropPath);
+    }
+
     public String getTitle() {
         return title;
     }
@@ -65,5 +71,11 @@ public class Movie {
         return overview;
     }
 
-    public double getRating() { return rating; }
+    public double getRating() {
+        return rating;
+    }
+
+    public int getMovieId() {
+       return movieId;
+    }
 }
