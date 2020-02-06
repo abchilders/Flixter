@@ -1,6 +1,7 @@
 package com.example.flixter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // layout resource, R.layout.activity_main, defines UI
         setContentView(R.layout.activity_main);
-        // define recycler view
+        // define recycler view with dividers between items
         RecyclerView rvMovies = findViewById(R.id.rvMovies);
+        rvMovies.addItemDecoration(new DividerItemDecoration(rvMovies.getContext(), DividerItemDecoration.VERTICAL));
         movies = new ArrayList<>();
         // Create the adapter using constructor for MovieAdapter
         final MovieAdapter movieAdapter = new MovieAdapter(this, movies);
