@@ -30,6 +30,7 @@ public class DetailActivity extends YouTubeBaseActivity {
     TextView tvTitle;
     TextView tvOverview;
     RatingBar ratingBar;
+    TextView tvVoteCount;
     YouTubePlayerView youTubePlayerView;
 
     @Override
@@ -41,6 +42,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvTitle = findViewById(R.id.tvTitle);
         tvOverview = findViewById(R.id.tvOverview);
         ratingBar = findViewById(R.id.ratingBar);
+        tvVoteCount = findViewById(R.id.tvVoteCount);
         youTubePlayerView = findViewById(R.id.player);
 
         // receive the key=value pair data from MovieAdapter.java
@@ -50,6 +52,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
         ratingBar.setRating((float) movie.getRating());
+        tvVoteCount.setText("Votes: " + movie.getVoteCount());
 
         // create new instance of AsyncHttpClient to make web request on videos API --> endpoint
         // gets the videos that have been added to a movie

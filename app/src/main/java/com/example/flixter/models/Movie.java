@@ -13,6 +13,7 @@ import java.util.List;
 public class Movie {
 
     int movieId;
+    int voteCount;
     String backdropPath;
     String posterPath;
     String title;
@@ -29,6 +30,7 @@ public class Movie {
     public Movie(JSONObject jsonObject) throws JSONException {
         // get the value at key (name:) in the JSON object passed to us
         movieId = jsonObject.getInt("id");
+        voteCount = jsonObject.getInt("vote_count");
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
@@ -77,5 +79,9 @@ public class Movie {
 
     public int getMovieId() {
        return movieId;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
     }
 }
