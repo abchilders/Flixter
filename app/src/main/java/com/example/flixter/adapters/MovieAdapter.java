@@ -19,6 +19,8 @@ import com.example.flixter.DetailActivity;
 import com.example.flixter.R;
 import com.example.flixter.models.Movie;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 // base RecyclerView.Adapter is an abstract class -- we need to write the body of some of its
@@ -105,7 +107,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     //      other components"-- binds components to each other at runtime
                     Intent i = new Intent(context, DetailActivity.class);
                     // pass data in key=val pairs to the new activity
-                    i.putExtra("title", movie.getTitle());
+                    i.putExtra("movie", Parcels.wrap(movie));
                     context.startActivity(i);
                 }
             });

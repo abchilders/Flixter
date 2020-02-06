@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.flixter.models.Movie;
+
+import org.parceler.Parcels;
+
 public class DetailActivity extends AppCompatActivity {
 
     // get references to elements in activity_detail.xml
@@ -26,7 +30,9 @@ public class DetailActivity extends AppCompatActivity {
         // receive the key=value pair data from MovieAdapter.java
         // (which, BTW, occurs when a movie row is clicked)
         // then use that to set title text on screen to what we received
-        String title = getIntent().getStringExtra("title");
-        tvTitle.setText(title);
+        Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+        tvTitle.setText(movie.getTitle());
+        tvOverview.setText(movie.getOverview());
+        ratingBar.setRating((float) movie.getRating()); 
     }
 }
