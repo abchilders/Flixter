@@ -31,6 +31,7 @@ public class Movie {
         // get the value at key (name:) in the JSON object passed to us
         movieId = jsonObject.getInt("id");
         voteCount = jsonObject.getInt("vote_count");
+        backdropPath = jsonObject.getString("backdrop_path");
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");

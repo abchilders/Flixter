@@ -2,6 +2,7 @@ package com.example.flixter.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.flixter.DetailActivity;
 import com.example.flixter.R;
 import com.example.flixter.models.Movie;
@@ -92,9 +94,24 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         public void bind(final Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
+            // url for poster or backdrop, depending on screen orientation
+            String imageUrl;
 
+            // if phone is in landscape, then imageUrl = backdrop image
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            {
+                imageUrl = movie.getBackdropPath();
+            } else {
+                // else, imageUrl = poster image
+                imageUrl = movie.getPosterPath();
+            }
             // use Glide to import movie poster image and load it into view
-            Glide.with(context).load(movie.getPosterPath()).into(ivPoster);
+            Glide.with(context)
+                    .load(imageUrl)
+                    .apply(new RequestOptions()
+                    .placeholder(R.drawable.film_reel)
+                    .error(R.drawable.film_reel))
+                    .into(ivPoster);
 
             // 1. Register click listener on the whole row
             // add an onclick listener to the row in RecyclerView so we can do something when a
