@@ -21,13 +21,11 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ### App Walkthough GIF
 
-`TODO://` Add the URL to your animated app walkthough `gif` in the image tag below, `YOUR_GIF_URL_HERE`. Make sure the gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after after adding gif)
-
-<img src="YOUR_GIF_URL_HERE" width=250><br>
+<img src="flixter_part_2.gif" width=250><br>
 
 ### Notes
 
-Describe any challenges encountered while building the app.
+I had some difficulty adding shared element transitions to the app, as I had to take the extra step of converting context to type Activity before I could pass it to ActivityOptionsCompat.makeSceneTransitionAnimation. Additionally, I previously attempted to add rounded corners to images using Glide, but this caused the top and bottom margins of the poster images to expand significantly, so I removed this. 
 
 ## Open-source libraries used
 - [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
